@@ -10,25 +10,34 @@ This project contains a class - JsonProvider - that can be used as managed bean.
 
 
 In the JSF page:
+```
         <script type="text/javascript">
           /* assign the contents of the collectionModel through a JSON formatted string to the global JS variable deptData */
           var deptData = #{jsonProviderBean[bindings.DeptView2.DCIteratorBinding]};
         </script>
+```
 
 Based on the tree binding in the Page Definition file:
+
+```
     <tree IterBinding="DeptView2Iterator" id="DeptView2">
+```
+
 (a tree binding for DeptView and nested EmpView , business components against the DEPT and EMP table)
 
 And this entry in adfc-config.xml:
+```
 <managed-bean id="__1">
     <managed-bean-name>jsonProviderBean</managed-bean-name>
     <managed-bean-class>nl.amis.json.view.JsonProvider</managed-bean-class>
     <managed-bean-scope>request</managed-bean-scope>
   </managed-bean>
+```
 
 The resulting JSON string is:
 
 
+```
 {
    "attributes": {
       "Deptno": "java.lang.Integer",
@@ -219,4 +228,5 @@ The resulting JSON string is:
       }
    ]
 }
+```
 
