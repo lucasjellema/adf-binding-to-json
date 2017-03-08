@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="DeptEmpViewLink"
+  Version="12.1.3.13.52"
+  InheritPersonalization="merge">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="nl.amis.json.model.DeptEmpViewLink_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="Dept"
+    Cardinality="1"
+    Source="true"
+    Owner="nl.amis.json.model.DeptView">
+    <DesignTime>
+      <Attr Name="_accessor" Value="true"/>
+      <Attr Name="_finderName" Value="Dept"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="nl.amis.json.model.DeptView.Deptno"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="Emps"
+    Cardinality="-1"
+    Owner="nl.amis.json.model.EmpView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="Emps"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="nl.amis.json.model.EmpView.Deptno"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="nl.amis.json.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.13.52" id="hrPageDef"
+                Package="nl.amis.json.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="DeptView2" RangeSize="25" DataControl="HrModuleDataControl" id="DeptView2Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="DeptView2Iterator" id="DeptView2">
+      <nodeDefinition DefName="nl.amis.json.model.DeptView" Name="DeptView20">
+        <AttrNames>
+          <Item Value="Deptno"/>
+          <Item Value="Dname"/>
+          <Item Value="Loc"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="Emps"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="nl.amis.json.model.EmpView" Name="DeptView21">
+        <AttrNames>
+          <Item Value="Empno"/>
+          <Item Value="Comm"/>
+          <Item Value="Deptno"/>
+          <Item Value="Ename"/>
+          <Item Value="Hiredate"/>
+          <Item Value="Job"/>
+          <Item Value="Mgr"/>
+          <Item Value="Sal"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

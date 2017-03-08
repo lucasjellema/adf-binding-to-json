@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+<AppModule
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="HrModule"
+  Version="12.1.3.13.52"
+  InheritPersonalization="merge"
+  ClearCacheOnRollback="true">
+  <ViewUsage
+    Name="DeptView1"
+    ViewObjectName="nl.amis.json.model.DeptView"/>
+  <ViewUsage
+    Name="EmpView1"
+    ViewObjectName="nl.amis.json.model.EmpView"/>
+  <ViewUsage
+    Name="DeptView2"
+    ViewObjectName="nl.amis.json.model.DeptView"/>
+  <ViewUsage
+    Name="EmpView2"
+    ViewObjectName="nl.amis.json.model.EmpView"/>
+  <ViewLinkUsage
+    Name="DeptEmpViewLink"
+    ViewLinkObjectName="nl.amis.json.model.DeptEmpViewLink"
+    SrcViewUsageName="nl.amis.json.model.HrModule.DeptView2"
+    DstViewUsageName="nl.amis.json.model.HrModule.EmpView2"
+    Reversed="false"/>
+</AppModule>

@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="hr.jsf" id="d1">
+        <!--  http://www.ateam-oracle.com/run-custom-javascript-when-adf-page-loads/ -->
+        <af:clientListener method="showJSONOnPageLoad" type="load"/>
+        <f:facet name="metaContainer">
+            <af:resource type="javascript">
+              function showJSONOnPageLoad(evt) {
+                  doIt(deptData);
+              }
+            </af:resource>
+        </f:facet>
+        <af:resource type="javascript" source="mylib.js"/>
+        <script type="text/javascript">
+          /* assign the contents of the collectionModel through a JSON formatted string to the global JS variable empData */
+          //var empData = #{jsonProviderBean[bindings.EmpView2.DCIteratorBinding]};
+          var deptData = #{jsonProviderBean[bindings.DeptView2.DCIteratorBinding]};
+        </script>
+         
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:panelGridLayout id="pgl1">
+                <af:gridRow height="250px" id="gr2">
+                    <af:gridCell width="100%" halign="stretch" valign="stretch" id="gc2">
+                        <!-- Header -->
+                        <af:showDetailHeader text="HRM" disclosed="true" id="sdh1">
+                            <f:facet name="context"/>
+                            <f:facet name="menuBar"/>
+                            <f:facet name="toolbar"/>
+                            <f:facet name="legend"/>
+                            <f:facet name="info"/>
+                            <af:outputText id="ot232"
+                                           value="Here is my song: #{jsonProviderBean[ bindings.DeptView2.DCIteratorBinding]}"/>
+                            <af:outputText id="ot233"
+                                           value="Here is my song: #{jsonProviderBean[ 'bindings.DeptView2.collectionModel']}"/>
+                        </af:showDetailHeader>
+                    </af:gridCell>
+                </af:gridRow>
+                <af:gridRow height="100%" id="gr1">
+                    <af:gridCell width="100%" halign="stretch" valign="stretch" id="gc1">
+                        <!-- Content -->
+                        <af:treeTable value="#{bindings.DeptView2.treeModel}" var="node"
+                                      selectionListener="#{bindings.DeptView2.treeModel.makeCurrent}"
+                                      rowSelection="single" id="tt1">
+                            <f:facet name="nodeStamp">
+                                <af:column id="c1">
+                                    <af:outputText value="#{node}" id="ot1"/>
+                                </af:column>
+                            </f:facet>
+                            <f:facet name="pathStamp">
+                                <af:outputText value="#{node}" id="ot2"/>
+                            </f:facet>
+                        </af:treeTable>
+                    </af:gridCell>
+                </af:gridRow>
+            </af:panelGridLayout>
+        </af:form>
+    </af:document>
+</f:view>

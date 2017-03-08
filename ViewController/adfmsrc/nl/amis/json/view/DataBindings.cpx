@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="12.1.3.13.52" id="DataBindings"
+             SeparateXMLFiles="false" Package="nl.amis.json.view" ClientType="Generic">
+  <pageMap>
+    <page path="/hr.jsf" usageId="nl_amis_json_view_hrPageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="nl_amis_json_view_hrPageDef" path="nl.amis.json.view.pageDefs.hrPageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <BC4JDataControl id="HrModuleDataControl" Package="nl.amis.json.model"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true" Configuration="HrModuleLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>
