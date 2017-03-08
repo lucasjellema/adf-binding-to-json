@@ -52,7 +52,11 @@ public class JsonProvider implements Map {
      *   The EL expression used in the page to send the iterator binding to this method is something like:
      *             var deptData = #{jsonProviderBean[bindings.DeptView2.DCIteratorBinding]};
      *             
+     *             
+     *             
      **/ 
+    //TODO: at the very least use StringBuilder and append instead of String
+    //TODO : create structured Java objects (HashMap, ArrayList) and (use Jackson to) serialize to JSON
     @Override
     public Object get(Object dataBinding) {
         String json = "{";
@@ -61,21 +65,21 @@ public class JsonProvider implements Map {
 
             // write meta data in JSON object for all attributes
             AttributeDef[] attributeDefs = iterBind.getAttributeDefs();
-            json = json + "'attributes': {";
+            json = json + "\"attributes\": {";
             boolean firstAtt = true;
             for (AttributeDef attributeDef : attributeDefs) {
                 json =
-                    json + (firstAtt ? "" : ",") + "'" + attributeDef.getName() + "': '" +
-                    attributeDef.getJavaType().getCanonicalName() + "'";
+                    json + (firstAtt ? "" : ",") + "\"" + attributeDef.getName() + "\": \"" +
+                    attributeDef.getJavaType().getCanonicalName() + "\"";
                 firstAtt = false;
             }
             json = json + "}";
             // fetch values for all rows
             Row[] rows = iterBind.getAllRowsInRange();
-            json = processRows(json + ", 'values':", rows);
+            json = processRows(json + ", \"values\":", rows);
         } catch (Exception e) {
             _logger.severe("Exception" + e.getMessage(), e);
-            json = json + ",'exception': '" + e.getMessage() + "'";
+            json = json + ",\"exception\": \"" + e.getMessage() + "\"";
         }
         return json + "}";
     }
@@ -93,15 +97,15 @@ public class JsonProvider implements Map {
                     ViewRowSetImpl vrs = (ViewRowSetImpl) row.getAttribute(attributeName);
                     try {
                         json =
-                            processRows(json + (firstAtt ? "'" : ",'") + attributeName + "':", vrs.getAllRowsInRange());
+                            processRows(json + (firstAtt ? "\"" : ",\"") + attributeName + "\":", vrs.getAllRowsInRange());
                     } catch (Exception e) {
                         _logger.severe("Exception in nested rows " + e.getMessage(), e);
                     }
                 } else {
                     json =
-                        json + (firstAtt ? "" : ",") + "'" + attributeName + "': " + writeAttribute(row.getAttribute(attributeName));
+                        json + (firstAtt ? "" : ",") + "\"" + attributeName + "\": " + writeAttribute(row.getAttribute(attributeName));
                 }
-                //                 json = json +  ",'"+attributeName+"Type': '"+ row.getAttribute(attributeName).getClass().getCanonicalName()+"'";
+                //                 json = json +  ",\""+attributeName+"Type\": \""+ row.getAttribute(attributeName).getClass().getCanonicalName()+"\"";
                 firstAtt = false;
             }
             json = json + "}";
@@ -119,7 +123,7 @@ public class JsonProvider implements Map {
         if (attribute instanceof Integer || attribute instanceof BigDecimal|| attribute instanceof Number) {
             return  attribute.toString();            
         } else {            
-            return  "'"+attribute+"'";
+            return  "\""+attribute+"\"";
         }
     }
 
